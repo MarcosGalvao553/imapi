@@ -5,7 +5,7 @@ Inventory Management API
 
 <b>Clonar o código</b>
 
-``git clone url``
+``git clone https://github.com/MarcosGalvao553/imapi``
 
 <b>Entrar na pasta do projeto</b>
 
