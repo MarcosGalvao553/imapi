@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/teste',function(){
     $teste = DB::connection('mysql')
-    ->table('NewTable')
+    ->table('Users')
     ->get()
     ->toArray();
 
