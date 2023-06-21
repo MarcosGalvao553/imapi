@@ -13,11 +13,11 @@ Inventory Management API
 
 <b>Build da imagem da aplicação</b>
 
-``docker build -t app_imapi . -f app.dockerfile``
+``docker build -t app_imapi . -f app.Dockerfile``
 
 <b>Build da imagem do webserver</b>
 
-``docker build -t web_imapi . -f web.dockerfile``
+``docker build -t web_imapi . -f web.Dockerfile``
 
 <b>Subir os serviços </b>
 
@@ -25,7 +25,7 @@ Inventory Management API
 
 <b>Entrar no Container </b>
 
-``docker exec -it app_imapi_1 bash``
+``docker exec -it imapi_app_1 bash``
 
 <b>Instalar as Dependências </b>
 
