@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InventoryTransactionsController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductsQuantitiesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +17,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/teste',function(){
-    $teste = DB::connection('mysql')
-    ->table('Users')
-    ->get()
-    ->toArray();
+Route::group(['middleware' => 'api'], function () {
+    Route::group(['prefix' => 'auth'], function(){
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh', [AuthController::class, 'refresh']);
+        Route::get('/user-profile', [AuthController::class, 'userProfile']);  
+    });
 
-    return $teste;
+    Route::group(['prefix' => 'products'], function(){
+        Route::post('/', [ProductsController::class, 'index']);
+        Route::post('/create', [ProductsController::class, 'create']);
+        Route::get('/show/{id}', [ProductsController::class, 'show']);
+        Route::delete('/destroy/{id}', [ProductsController::class, 'destroy']);
+        Route::post('/update', [ProductsController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'products-quantities'], function(){
+        Route::get('/', [ProductsQuantitiesController::class, 'index']);
+        Route::post('/create', [ProductsQuantitiesController::class, 'create']);
+        Route::get('/show/{id}', [ProductsQuantitiesController::class, 'show']);
+        Route::delete('/destroy/{id}', [ProductsQuantitiesController::class, 'destroy']);
+        Route::post('/update', [ProductsQuantitiesController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'inventory-transactions'], function(){
+        Route::get('/', [InventoryTransactionsController::class, 'index']);
+        Route::post('/create', [InventoryTransactionsController::class, 'create']);
+        Route::get('/show/{id}', [InventoryTransactionsController::class, 'show']);
+    });
 });
